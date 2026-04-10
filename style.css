@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a0f05 0%, #2d1a0a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', 'Comic Neue', 'Pacifico', cursive, sans-serif;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.scene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+canvas {
+    border-radius: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 
+                0 0 0 3px rgba(255,215,0,0.3),
+                0 0 0 6px rgba(255,215,0,0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    background: #2b1d0e;
+}
+
+canvas:active {
+    transform: scale(0.98);
+}
+
+.birthday-message {
+    text-align: center;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(10px);
+    padding: 15px 25px;
+    border-radius: 60px;
+    border: 1px solid rgba(255,215,0,0.3);
+    animation: glow 2s ease-in-out infinite;
+}
+
+.birthday-message h1 {
+    color: #f5c542;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    letter-spacing: 2px;
+}
+
+.birthday-message p {
+    color: #ffe4a0;
+    margin-top: 8px;
+    font-size: 0.9rem;
+}
+
+.birthday-message .sub {
+    color: #ffb347;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.reset-hint {
+    background: linear-gradient(135deg, #f5b81b 0%, #d4940a 100%);
+    padding: 10px 25px;
+    border-radius: 50px;
+    color: #2b1d0e;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.reset-hint:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+
+.reset-hint:active {
+    transform: translateY(1px);
+}
+
+.footer-note {
+    color: rgba(255,215,150,0.6);
+    font-size: 0.8rem;
+    text-align: center;
+    font-style: italic;
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px rgba(255,215,0,0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255,215,0,0.5);
+    }
+}
+
+@media (max-width: 600px) {
+    .birthday-message h1 {
+        font-size: 1.1rem;
+    }
+    
+    .birthday-message p {
+        font-size: 0.75rem;
+    }
+    
+    .reset-hint {
+        padding: 8px 20px;
+        font-size: 0.8rem;
+    }
+}
