@@ -1,4 +1,4 @@
-// beer.js - Jarra de cerveza para el cumpleaños 🍺
+// beer.js - Jarra de cerveza optimizada para móvil 🍺📱
 const Beer = (function() {
     let globalScale = 1;
 
@@ -7,17 +7,20 @@ const Beer = (function() {
 
         const centerX = ctx.canvas.width / 2;
         const centerY = ctx.canvas.height / 2;
-        const scale = (1 + pulse * 0.08) * globalScale;
+        
+        // Escala responsiva basada en el tamaño del canvas
+        const responsiveScale = Math.min(ctx.canvas.width, ctx.canvas.height) / 600;
+        const scale = globalScale * responsiveScale;
 
         ctx.save();
         ctx.translate(centerX, centerY);
         ctx.scale(scale, scale);
 
-        // Sombra
-        ctx.shadowColor = "rgba(0,0,0,0.3)";
-        ctx.shadowBlur = 10;
-        ctx.shadowOffsetX = 3;
-        ctx.shadowOffsetY = 3;
+        // Sombra (más ligera en móvil para rendimiento)
+        ctx.shadowColor = "rgba(0,0,0,0.2)";
+        ctx.shadowBlur = 8;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
 
         // Vaso
         const glassGrad = ctx.createLinearGradient(-80, -120, 60, 120);
@@ -46,9 +49,9 @@ const Beer = (function() {
         ctx.fill();
 
         // Espuma
-        ctx.shadowBlur = 5;
+        ctx.shadowBlur = 3;
         ctx.shadowOffsetX = 0;
-        ctx.shadowOffsetY = 2;
+        ctx.shadowOffsetY = 1;
         
         for (let i = 0; i < 5; i++) {
             const foamGrad = ctx.createRadialGradient(
@@ -59,7 +62,7 @@ const Beer = (function() {
             foamGrad.addColorStop(1, "#f0f0f0");
             
             ctx.beginPath();
-            ctx.arc(-60 + i * 30, -130, 22 + Math.sin(Date.now() * 0.005 + i) * 2, 0, Math.PI * 2);
+            ctx.arc(-60 + i * 30, -130 + Math.sin(Date.now() * 0.003 + i) * 1, 22, 0, Math.PI * 2);
             ctx.fillStyle = foamGrad;
             ctx.fill();
         }
@@ -74,18 +77,20 @@ const Beer = (function() {
         ctx.fillStyle = "rgba(244, 180, 0, 0.6)";
         ctx.fill();
 
-        // Burbujas
+        // 🫧 BURBUJAS ANIMADAS (optimizadas para móvil)
         const now = Date.now();
-        ctx.fillStyle = "rgba(255,255,255,0.7)";
         
-        for (let i = 0; i < 12; i++) {
+        // Menos burbujas pero más grandes para mejor visibilidad en móvil
+        for (let i = 0; i < 10; i++) {
             const speed = 0.03 + (i * 0.01);
-            const yOffset = (now * speed + i * 30) % 220;
-            const xPos = -50 + (i % 8) * 12;
-            const size = 2 + (i % 3);
+            const yOffset = (now * speed + i * 35) % 220;
+            const xPos = -50 + (i % 7) * 14;
+            const size = 3 + (i % 3);
+            const opacity = 0.6 + Math.sin(now * 0.005 + i) * 0.3;
             
             ctx.beginPath();
             ctx.arc(xPos, -100 + yOffset, size, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
             ctx.fill();
         }
 
